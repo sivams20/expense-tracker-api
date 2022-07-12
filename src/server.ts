@@ -10,7 +10,7 @@ app.listen(port, ()=>{
     console.log(`Connected successfully on port ${port}`);
 });
 
-mongoose.connect('mongodb+srv://sivams20:siv_admin@expensetrackcluster.lvlsc.mongodb.net/?retryWrites=true&w=majority').then(() => {
+mongoose.connect('mongodb+srv://sivams20:siv_admin@expensetrackcluster.lvlsc.mongodb.net/tracker?retryWrites=true&w=majority').then(() => {
     console.log('Connected to database !!');
 }).catch((err) => {
     console.log('Connection failed!' + err.message);
