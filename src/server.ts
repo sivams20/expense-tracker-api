@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 
 import userRoute from './api/routes/users';
 
+const cors = require('cors');
 const app = express();
+app.use(cors());
 const port = 5000;
 
 app.listen(port, ()=>{
