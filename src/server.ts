@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from "mongoose";
 
 import userRoute from './api/routes/users';
+import categoryRoute from './api/routes/categories';
 
 const cors = require('cors');
 const app = express();
@@ -28,3 +29,4 @@ app.use((req, res, next) => {
 });
 
 app.use('/user', userRoute);
+app.use('/category', categoryRoute);
