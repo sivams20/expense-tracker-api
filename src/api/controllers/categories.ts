@@ -19,4 +19,19 @@ const add_category = (req, res, next) => {
         });
 }
 
-export {add_category};
+const fetch_categories = (req, res, next) => {
+    Category.find()
+        .select('name')
+        .exec()
+        .then(result => {
+            const response = {
+                categories: result
+            }
+            res.status(200).json(response);
+        })
+        .catch(err => {
+            res.status(500).json({ error: err });
+        })
+}
+
+export {add_category, fetch_categories};
