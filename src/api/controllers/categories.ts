@@ -4,6 +4,7 @@ import Category from "../models/categories";
 const add_category = (req, res, next) => {
     const category = new Category({
         _id: new mongoose.Types.ObjectId(),
+        userId: req.userData.userId,
         name: req.body.name
     });
     category.save()
