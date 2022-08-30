@@ -35,4 +35,16 @@ const fetch_categories = (req, res, next) => {
         })
 }
 
-export {add_category, fetch_categories};
+const update_category = (req, res, next) => {
+    const categoryId = req.params.categoryId;
+    Category.updateOne({_id: categoryId}, { $set: { name: req.body.category } })
+    .exec()
+    .then(result => {
+        res.staus(200).json(result);
+    })
+    .catch(err => {
+        res.staus(500).json({error: err});
+    });
+}
+
+export {add_category, fetch_categories, update_category};
