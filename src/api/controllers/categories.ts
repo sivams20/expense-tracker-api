@@ -36,7 +36,7 @@ const fetch_categories = (req, res, next) => {
 }
 
 const update_category = (req, res, next) => {
-    const categoryId = req.params.categoryId;
+    const categoryId = req.body.categoryId;
     Category.updateOne({_id: categoryId}, { $set: { name: req.body.category } })
     .exec()
     .then(result => {
@@ -47,4 +47,18 @@ const update_category = (req, res, next) => {
     });
 }
 
-export {add_category, fetch_categories, update_category};
+const delete_category = (req, res, next) => {
+    const categoryId = req.body.categoryId;
+    Category.deleteOne({ _id: categoryId })
+        .exec()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
+}
+
+export {add_category, fetch_categories, update_category, delete_category};
