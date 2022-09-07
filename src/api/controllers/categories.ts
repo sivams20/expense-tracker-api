@@ -21,7 +21,8 @@ const add_category = (req, res, next) => {
 }
 
 const fetch_categories = (req, res, next) => {
-    Category.find()
+    const userId = req.userData.userId;
+    Category.find({userId})
         .select('name')
         .exec()
         .then(result => {

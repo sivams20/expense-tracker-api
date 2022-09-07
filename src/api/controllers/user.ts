@@ -24,7 +24,6 @@ const signup = (req, res, next) => {
                     user
                     .save()
                     .then(result=>{
-                        console.log(result);
                         res.status(200).json({
                             message: 'User Created'
                         })
@@ -54,14 +53,12 @@ const signIn = (req, res, next)=>{
         const hashData = user[0];
         const password = hashData.password;
         bcrypt.compare(req.body.password, password, (error, result)=>{
-            console.log(result);
             if(error){
                 return res.status(401).json({
                     message: "Auth Failed"
                 });
             }
             if(result){
-                console.log('success scenario');
                 const token = jwt.sign({email: user[0].email, userId: user[0]._id}, 'JWT_Secret_Key',{expiresIn: "1h"});
                 return res.status(200).json({
                     message: "Authentication Successful",
