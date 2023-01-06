@@ -11,8 +11,6 @@ const add_spending = (req, res, next) => {
     category: req.body.category,
     note: req.body.note,
   });
-  console.log(spending);
-  return false;
   spending
     .save()
     .then((result) => {
