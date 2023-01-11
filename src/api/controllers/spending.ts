@@ -26,4 +26,20 @@ const add_spending = (req, res, next) => {
     });
 };
 
-export { add_spending };
+const fetch_spendings = (req, res, next) => {
+  const userId = req.userData.userId;
+  Spending.find({ userId })
+    .select("date amount note category")
+    .exec()
+    .then((result) => {
+      const response = {
+        spendings: result,
+      };
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err });
+    });
+};
+
+export { add_spending, fetch_spendings };
