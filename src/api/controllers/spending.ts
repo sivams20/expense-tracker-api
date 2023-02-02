@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import Spending from "../models/spendings";
 
 const add_spending = (req, res, next) => {
-  console.log("spending", req);
   const spending = new Spending({
     _id: new mongoose.Types.ObjectId(),
     userId: req.userData.userId,
@@ -42,4 +41,22 @@ const fetch_spendings = (req, res, next) => {
     });
 };
 
-export { add_spending, fetch_spendings };
+const fetch_spending = (req, res, next) => {
+  const userId = req.userData.userId;
+  const id = req.body.spendingId;
+  Spending.find({ _id: id })
+    .select("date amount note category")
+    .exec()
+    .then((result) => {
+      console.log(result);
+      const response = {
+        spending: result,
+      };
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err });
+    });
+};
+
+export { add_spending, fetch_spendings, fetch_spending };
