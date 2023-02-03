@@ -42,8 +42,7 @@ const fetch_spendings = (req, res, next) => {
 };
 
 const fetch_spending = (req, res, next) => {
-  const userId = req.userData.userId;
-  const id = req.body.spendingId;
+  const id = req.params.id;
   Spending.find({ _id: id })
     .select("date amount note category")
     .exec()
