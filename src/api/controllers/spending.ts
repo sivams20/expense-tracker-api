@@ -58,4 +58,26 @@ const fetch_spending = (req, res, next) => {
     });
 };
 
-export { add_spending, fetch_spendings, fetch_spending };
+const update_spending = (req, res, next) => {
+  const spendingId = req.body.spendingId;
+  Spending.updateOne(
+    { _id: spendingId },
+    {
+      $set: {
+        amount: req.body.amount,
+        date: req.body.date,
+        category: req.body.category,
+        note: req.body.note,
+      },
+    }
+  )
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err });
+    });
+};
+
+export { add_spending, fetch_spendings, fetch_spending, update_spending };
