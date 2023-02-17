@@ -28,6 +28,7 @@ const add_spending = (req, res, next) => {
 const fetch_spendings = (req, res, next) => {
   const userId = req.userData.userId;
   Spending.find({ userId })
+    .sort({ date: -1 })
     .select("date amount note category")
     .exec()
     .then((result) => {
