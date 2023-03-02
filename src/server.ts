@@ -8,7 +8,7 @@ import spendingRoute from "./api/routes/spendings";
 const cors = require("cors");
 const app = express();
 app.use(cors());
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Connected successfully on port ${port}`);
@@ -34,6 +34,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/", (req, res) => {
+  res.send("Connected...");
+});
 app.use("/user", userRoute);
 app.use("/category", categoryRoute);
 app.use("/spending", spendingRoute);
