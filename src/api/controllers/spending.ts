@@ -81,4 +81,24 @@ const update_spending = (req, res, next) => {
     });
 };
 
-export { add_spending, fetch_spendings, fetch_spending, update_spending };
+const delete_spending = (req, res, next) => {
+  const spendingId = req.body.spendingId;
+  Spending.deleteOne({ _id: spendingId })
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+export {
+  add_spending,
+  fetch_spendings,
+  fetch_spending,
+  update_spending,
+  delete_spending,
+};
